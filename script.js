@@ -129,4 +129,4 @@ class LayoutDesigner {
         
         grid.innerHTML = '';
         grid.style.gridTemplateColumns = `repeat(${this.gridDimensions.cols}, 40px)`;
-        grid.style.gridTemplateRows = `repeat(${this.gridDimensions.rows}, 40
+        grid.style.gridTemplateRows = `repeat(${this.gridDimensions.rows}, 40;
