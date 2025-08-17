@@ -482,7 +482,453 @@
             display: block;
         }
         
-        /* Services Page Styling */
+        /* Design Settings Bar */
+        .design-settings {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 15px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .setting-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 24px;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+        
+        input:checked + .slider {
+            background-color: #dc2626;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .setting-label {
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        /* Enhanced Grid Styling */
+        .battleship-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 42px);
+            grid-template-rows: repeat(8, 42px);
+            gap: 1px;
+            background: #e5e7eb;
+            padding: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            position: relative;
+            margin: 0 auto;
+            justify-content: center;
+        }
+        
+        .battleship-grid.hide-grid {
+            gap: 0;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .grid-cell {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .hide-grid .grid-cell {
+            border: 1px solid transparent;
+        }
+        
+        .grid-cell:hover {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            transform: scale(1.05);
+        }
+        
+        .grid-cell.occupied {
+            background: #dc2626;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .grid-cell.occupied:hover {
+            background: #b91c1c;
+            transform: scale(1.02);
+        }
+        
+        .grid-cell.snap-target {
+            background: #dcfce7;
+            border-color: #16a34a;
+            border-width: 2px;
+            transform: scale(1.02);
+        }
+        
+        .snap-indicator {
+            position: absolute;
+            border: 2px solid #16a34a;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 4px;
+            pointer-events: none;
+            z-index: 10;
+            transition: all 0.1s ease;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .design-settings {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .layout-designer {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .battleship-grid {
+                grid-template-columns: repeat(8, 38px);
+                grid-template-rows: repeat(6, 38px);
+                padding: 15px;
+            }
+            
+            .row-labels {
+                gap: 37px;
+            }
+            
+            .col-labels {
+                gap: 37px;
+            }
+            
+            .seat-details {
+                order: -1;
+            }
+            
+            .seat-palette {
+                order: 1;
+            }
+            
+            .seat-icons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .seat-icon {
+                flex: 1;
+                min-width: 120px;
+                max-width: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .battleship-grid {
+                grid-template-columns: repeat(6, 35px);
+                grid-template-rows: repeat(5, 35px);
+                padding: 10px;
+            }
+            
+            .row-labels span, .col-labels span {
+                font-size: 0.8rem;
+            }
+            
+            .row-labels {
+                gap: 34px;
+            }
+            
+            .col-labels {
+                gap: 34px;
+            }
+            
+            .coordinate-labels {
+                transform: scale(0.9);
+            }
+        }
+        .layout-designer {
+            display: grid;
+            grid-template-columns: 200px 1fr 250px;
+            gap: 30px;
+            margin: 40px 0;
+            min-height: 500px;
+        }
+        
+        .seat-palette {
+            background: #f8fafc;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        .seat-palette h3 {
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .seat-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .seat-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+        
+        .seat-icon:hover {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+        
+        .seat-icon.dragging {
+            opacity: 0.5;
+        }
+        
+        .icon-visual {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 3px;
+        }
+        
+        .small-booth-icon {
+            background: #16a34a;
+        }
+        
+        .big-booth-icon {
+            background: #2563eb;
+        }
+        
+        .chair-icon {
+            background: #dc2626;
+        }
+        
+        .barstool-icon {
+            background: #7c3aed;
+        }
+        
+        .seat-icon span {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .grid-container {
+            text-align: center;
+        }
+        
+        .grid-container h3 {
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .coordinate-labels {
+            margin-bottom: 10px;
+        }
+        
+        .row-labels {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 5px;
+        }
+        
+        .row-labels span, .col-labels span {
+            font-weight: bold;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .col-labels {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: -25px;
+            top: 0;
+            gap: 38px;
+            margin-top: 20px;
+        }
+        
+        .battleship-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(8, 40px);
+            gap: 2px;
+            background: #f1f5f9;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            position: relative;
+            margin: 0 auto;
+            justify-content: center;
+        }
+        
+        .grid-cell {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .grid-cell:hover {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+        
+        .grid-cell.occupied {
+            background: #dc2626;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .grid-cell.occupied:hover {
+            background: #b91c1c;
+        }
+        
+        .grid-cell.drop-zone {
+            background: #dcfce7;
+            border-color: #16a34a;
+            border-width: 2px;
+        }
+        
+        .seat-details {
+            background: #f8fafc;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        .seat-details h3 {
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .seat-details form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .seat-details label {
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .seat-details input, .seat-details select, .seat-details textarea {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .seat-details button {
+            background: #dc2626;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .seat-details button:hover {
+            background: #b91c1c;
+        }
+        
+        .seat-details button:last-child {
+            background: #6b7280;
+        }
+        
+        .seat-details button:last-child:hover {
+            background: #4b5563;
+        }
+        
+        .layout-controls {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -712,6 +1158,28 @@
                 font-size: 0.9rem;
             }
             
+            .layout-designer {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .battleship-grid {
+                grid-template-columns: repeat(8, 35px);
+                grid-template-rows: repeat(6, 35px);
+            }
+            
+            .row-labels {
+                gap: 33px;
+            }
+            
+            .col-labels {
+                gap: 33px;
+            }
+            
+            .seat-details {
+                order: -1;
+            }
+            
             .process-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -818,6 +1286,7 @@
             <nav class="nav-menu">
                 <a href="#home" class="nav-item" onclick="showLanding()">Home</a>
                 <a href="#services" class="nav-item" onclick="showSection('services')">Services</a>
+                <a href="#design" class="nav-item" onclick="showSection('design')">Design</a>
                 <a href="#contact" class="nav-item" onclick="showSection('contact')">Contact</a>
                 <a href="#access" class="nav-item cta" onclick="showSection('access')">Access Portal</a>
             </nav>
@@ -825,6 +1294,7 @@
             <div class="mobile-nav" id="mobileNav">
                 <a href="#home" class="nav-item" onclick="showLanding(); closeMobileMenu()">Home</a>
                 <a href="#services" class="nav-item" onclick="showSection('services'); closeMobileMenu()">Services</a>
+                <a href="#design" class="nav-item" onclick="showSection('design'); closeMobileMenu()">Design</a>
                 <a href="#contact" class="nav-item" onclick="showSection('contact'); closeMobileMenu()">Contact</a>
                 <a href="#access" class="nav-item cta" onclick="showSection('access'); closeMobileMenu()">Access Portal</a>
             </div>
@@ -957,133 +1427,108 @@
         <!-- Services Section -->
         <div id="servicesSection" class="page-section">
             <div class="section">
-                <h2>How We Record Your Furniture</h2>
-                <p>Our systematic approach makes future repairs effortless</p>
+                <h2>Complete Upholstery Solutions</h2>
+                <p>We handle everything from quick repairs to full restaurant buildouts</p>
+            </div>
+        </div>
+
+        <!-- Design Section -->
+        <div id="designSection" class="page-section">
+            <div class="section">
+                <h2>Restaurant Layout Designer</h2>
+                <p>Create your restaurant's seat map - drag and drop seats like placing ships in battleship</p>
                 
-                <div class="process-grid">
-                    <!-- Step 1 -->
-                    <div class="process-step">
-                        <div class="process-icon">📋</div>
-                        <h3>Initial Site Survey</h3>
-                        <p>We visit your restaurant and create a complete inventory of every seat, booth, and chair. Each piece gets a unique ID number and location code.</p>
-                        <div class="process-details">
-                            <strong>What we record:</strong>
-                            <ul>
-                                <li>Seat dimensions (length, width, depth)</li>
-                                <li>Current fabric type and color</li>
-                                <li>Foam density and condition</li>
-                                <li>Frame construction details</li>
-                                <li>Wear patterns and problem areas</li>
-                            </ul>
-                        </div>
+                <!-- Settings Bar -->
+                <div class="design-settings">
+                    <div class="setting-group">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autosnapToggle" checked onchange="toggleAutosnap()">
+                            <span class="slider"></span>
+                            <span class="setting-label">Auto-Snap to Grid</span>
+                        </label>
                     </div>
-                    
-                    <!-- Step 2 -->
-                    <div class="process-step">
-                        <div class="process-icon">📏</div>
-                        <h3>Precision Measurements</h3>
-                        <p>Every seat gets measured to 1/4 inch accuracy. We create templates for complex shapes and document any custom modifications.</p>
-                        <div class="process-details">
-                            <strong>Measurement process:</strong>
-                            <ul>
-                                <li>Digital calipers for precise dimensions</li>
-                                <li>Photo documentation from multiple angles</li>
-                                <li>Paper templates for curved sections</li>
-                                <li>Fabric grain direction notes</li>
-                                <li>Attachment method documentation</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3 -->
-                    <div class="process-step">
-                        <div class="process-icon">🎨</div>
-                        <h3>Fabric Matching & Sourcing</h3>
-                        <p>We source your exact fabric or find the closest match. We purchase full rolls and store extra material for future repairs.</p>
-                        <div class="process-details">
-                            <strong>Fabric management:</strong>
-                            <ul>
-                                <li>Color matching with spectrophotometer</li>
-                                <li>Texture and grain pattern analysis</li>
-                                <li>UV resistance and durability testing</li>
-                                <li>Bulk purchasing for cost savings</li>
-                                <li>Climate-controlled storage system</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 4 -->
-                    <div class="process-step">
-                        <div class="process-icon">🗺️</div>
-                        <h3>Digital Seat Mapping</h3>
-                        <p>We create your custom restaurant layout in our system. Every seat becomes clickable with instant access to its complete profile.</p>
-                        <div class="process-details">
-                            <strong>Digital system includes:</strong>
-                            <ul>
-                                <li>Interactive floor plan with seat locations</li>
-                                <li>Individual seat profiles with all measurements</li>
-                                <li>Fabric specifications and lot numbers</li>
-                                <li>Repair history and maintenance notes</li>
-                                <li>Estimated replacement timeline</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 5 -->
-                    <div class="process-step">
-                        <div class="process-icon">🔧</div>
-                        <h3>Quality Control & Testing</h3>
-                        <p>Before we leave, we test a sample repair to ensure perfect fit, color match, and durability. Everything gets documented for consistency.</p>
-                        <div class="process-details">
-                            <strong>Quality assurance:</strong>
-                            <ul>
-                                <li>Test repair on least visible seat</li>
-                                <li>Color verification under restaurant lighting</li>
-                                <li>Attachment method validation</li>
-                                <li>Customer approval and sign-off</li>
-                                <li>Final system testing and training</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 6 -->
-                    <div class="process-step">
-                        <div class="process-icon">📱</div>
-                        <h3>System Activation & Training</h3>
-                        <p>We generate your unique QR code, train your staff, and activate your account. From this moment, repairs are just a few taps away.</p>
-                        <div class="process-details">
-                            <strong>Launch package includes:</strong>
-                            <ul>
-                                <li>Custom QR code for instant access</li>
-                                <li>Staff training on the system</li>
-                                <li>Laminated quick-reference cards</li>
-                                <li>Manager contact information update</li>
-                                <li>24/7 support hotline access</li>
-                            </ul>
-                        </div>
+                    <div class="setting-group">
+                        <button class="btn secondary" onclick="toggleGridView()">Toggle Grid Lines</button>
                     </div>
                 </div>
                 
-                <div class="results-section">
-                    <h3>The Result: Effortless Future Repairs</h3>
-                    <div class="results-grid">
-                        <div class="result-card">
-                            <strong>⚡ 2-Minute Ordering</strong>
-                            <p>Scan QR code, click damaged seat, pay. That's it.</p>
-                        </div>
-                        <div class="result-card">
-                            <strong>💰 No Surprise Costs</strong>
-                            <p>Prices set during initial visit. No markup, no guessing.</p>
-                        </div>
-                        <div class="result-card">
-                            <strong>🎯 Perfect Matches</strong>
-                            <p>We already have your fabric and measurements on file.</p>
-                        </div>
-                        <div class="result-card">
-                            <strong>📈 Scalable System</strong>
-                            <p>Add new locations, update contacts, track all repairs.</p>
+                <div class="layout-designer">
+                    <!-- Seat Palette -->
+                    <div class="seat-palette">
+                        <h3>Seat Types</h3>
+                        <div class="seat-icons">
+                            <div class="seat-icon" draggable="true" data-type="small-booth" data-size="2x1">
+                                <div class="icon-visual small-booth-icon">SB</div>
+                                <span>Small Booth</span>
+                            </div>
+                            <div class="seat-icon" draggable="true" data-type="big-booth" data-size="3x2">
+                                <div class="icon-visual big-booth-icon">BB</div>
+                                <span>Big Booth</span>
+                            </div>
+                            <div class="seat-icon" draggable="true" data-type="chair" data-size="1x1">
+                                <div class="icon-visual chair-icon">C</div>
+                                <span>Chair</span>
+                            </div>
+                            <div class="seat-icon" draggable="true" data-type="barstool" data-size="1x1">
+                                <div class="icon-visual barstool-icon">BS</div>
+                                <span>Bar Stool</span>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Grid Layout -->
+                    <div class="grid-container">
+                        <h3>Restaurant Floor Plan</h3>
+                        <div class="coordinate-labels">
+                            <div class="row-labels">
+                                <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span>
+                            </div>
+                            <div class="col-labels">
+                                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            </div>
+                        </div>
+                        <div class="battleship-grid" id="restaurantGrid"></div>
+                        <div class="snap-indicator" id="snapIndicator" style="display: none;"></div>
+                    </div>
+                    
+                    <!-- Seat Details Panel -->
+                    <div class="seat-details" id="seatDetails" style="display: none;">
+                        <h3>Seat Details</h3>
+                        <form id="seatForm">
+                            <label>Seat ID: <span id="seatId"></span></label>
+                            <label>Type: <span id="seatType"></span></label>
+                            
+                            <label>Fabric Type:</label>
+                            <select name="fabric">
+                                <option>Vinyl</option>
+                                <option>Leather</option>
+                                <option>Fabric</option>
+                            </select>
+                            
+                            <label>Fabric Color:</label>
+                            <input type="text" name="color" placeholder="e.g. Brown, Black, Red">
+                            
+                            <label>Condition:</label>
+                            <select name="condition">
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>Needs Repair</option>
+                                <option>Replace Soon</option>
+                            </select>
+                            
+                            <label>Notes:</label>
+                            <textarea name="notes" placeholder="Special measurements, damage details, etc."></textarea>
+                            
+                            <button type="button" onclick="saveSeatDetails()">Save Details</button>
+                            <button type="button" onclick="removeSeat()">Remove Seat</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="layout-controls">
+                    <button class="btn" onclick="clearGrid()">Clear All</button>
+                    <button class="btn" onclick="exportLayout()">Export Layout</button>
+                    <button class="btn secondary" onclick="loadSampleLayout()">Load Sample</button>
                 </div>
             </div>
         </div>
@@ -1162,6 +1607,7 @@
             
             const sectionMap = {
                 'services': 'servicesSection',
+                'design': 'designSection',
                 'contact': 'contactSection',
                 'access': 'accessSection'
             };
@@ -1218,20 +1664,419 @@
             showCustomer(currentCustomer);
         }, 3000);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            showLanding();
+        let draggedItem = null;
+        let selectedSeat = null;
+        let seatCounter = 1;
+        let restaurantLayout = {};
+        let autosnapEnabled = true;
+        let gridVisible = true;
+        let snapThreshold = 20; // pixels
+
+        function toggleAutosnap() {
+            autosnapEnabled = document.getElementById('autosnapToggle').checked;
+        }
+
+        function toggleGridView() {
+            gridVisible = !gridVisible;
+            const grid = document.getElementById('restaurantGrid');
+            if (gridVisible) {
+                grid.classList.remove('hide-grid');
+            } else {
+                grid.classList.add('hide-grid');
+            }
+        }
+
+        function initializeGrid() {
+            const grid = document.getElementById('restaurantGrid');
+            if (!grid) return;
             
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(e) {
-                const mobileNav = document.getElementById('mobileNav');
-                const mobileMenu = document.querySelector('.mobile-menu');
+            grid.innerHTML = '';
+            
+            // Create responsive grid based on screen size
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            
+            let rows = 8, cols = 10;
+            if (isMobile) { rows = 6; cols = 8; }
+            if (isSmallMobile) { rows = 5; cols = 6; }
+            
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'grid-cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+                    cell.dataset.coordinate = String.fromCharCode(65 + row) + (col + 1);
+                    
+                    cell.addEventListener('click', () => selectCell(cell));
+                    cell.addEventListener('dragover', handleDragOver);
+                    cell.addEventListener('drop', handleDrop);
+                    cell.addEventListener('touchstart', handleTouchStart, {passive: false});
+                    cell.addEventListener('touchmove', handleTouchMove, {passive: false});
+                    cell.addEventListener('touchend', handleTouchEnd, {passive: false});
+                    
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        // Touch handling for mobile
+        let touchStartData = null;
+        let isDragging = false;
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartData = {
+                x: touch.clientX,
+                y: touch.clientY,
+                element: e.target
+            };
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!touchStartData) return;
+            
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - touchStartData.x);
+            const deltaY = Math.abs(touch.clientY - touchStartData.y);
+            
+            if (deltaX > 10 || deltaY > 10) {
+                isDragging = true;
+                // Show visual feedback for dragging
+                if (autosnapEnabled) {
+                    showSnapTarget(touch.clientX, touch.clientY);
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            if (isDragging && touchStartData) {
+                const touch = e.changedTouches[0];
+                const target = document.elementFromPoint(touch.clientX, touch.clientY);
                 
-                if (isMobileMenuOpen && !mobileNav.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    closeMobileMenu();
+                if (target && target.classList.contains('grid-cell')) {
+                    // Handle drop on mobile
+                    if (touchStartData.element.classList.contains('seat-icon')) {
+                        const seatIcon = touchStartData.element;
+                        draggedItem = {
+                            type: seatIcon.dataset.type,
+                            size: seatIcon.dataset.size
+                        };
+                        handleDrop({target, preventDefault: () => {}});
+                    }
+                }
+            }
+            
+            touchStartData = null;
+            isDragging = false;
+            hideSnapIndicator();
+        }
+
+        function handleDragStart(e) {
+            draggedItem = {
+                type: e.target.dataset.type,
+                size: e.target.dataset.size
+            };
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            draggedItem = null;
+            hideSnapIndicator();
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            if (draggedItem && autosnapEnabled) {
+                showSnapTarget(e.clientX, e.clientY);
+            }
+        }
+
+        function showSnapTarget(clientX, clientY) {
+            const grid = document.getElementById('restaurantGrid');
+            const gridRect = grid.getBoundingClientRect();
+            
+            if (clientX < gridRect.left || clientX > gridRect.right || 
+                clientY < gridRect.top || clientY > gridRect.bottom) {
+                hideSnapIndicator();
+                return;
+            }
+            
+            // Calculate which cell we're hovering over
+            const cellWidth = gridRect.width / (window.innerWidth <= 480 ? 6 : window.innerWidth <= 768 ? 8 : 10);
+            const cellHeight = gridRect.height / (window.innerWidth <= 480 ? 5 : window.innerWidth <= 768 ? 6 : 8);
+            
+            const relativeX = clientX - gridRect.left;
+            const relativeY = clientY - gridRect.top;
+            
+            const col = Math.floor(relativeX / cellWidth);
+            const row = Math.floor(relativeY / cellHeight);
+            
+            const targetCell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            if (targetCell && draggedItem) {
+                const [width, height] = draggedItem.size.split('x').map(Number);
+                
+                if (canPlaceSeat(row, col, width, height)) {
+                    showSnapIndicator(row, col, width, height);
+                } else {
+                    hideSnapIndicator();
+                }
+            }
+        }
+
+        function showSnapIndicator(row, col, width, height) {
+            const grid = document.getElementById('restaurantGrid');
+            const firstCell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            
+            if (!firstCell) return;
+            
+            const gridRect = grid.getBoundingClientRect();
+            const cellRect = firstCell.getBoundingClientRect();
+            
+            const cellWidth = cellRect.width;
+            const cellHeight = cellRect.height;
+            const gap = 1; // Grid gap
+            
+            let indicator = document.getElementById('snapIndicator');
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'snapIndicator';
+                indicator.className = 'snap-indicator';
+                grid.parentElement.appendChild(indicator);
+            }
+            
+            const indicatorWidth = (cellWidth * width) + (gap * (width - 1));
+            const indicatorHeight = (cellHeight * height) + (gap * (height - 1));
+            
+            indicator.style.display = 'block';
+            indicator.style.left = (cellRect.left - gridRect.left + grid.offsetLeft) + 'px';
+            indicator.style.top = (cellRect.top - gridRect.top + grid.offsetTop) + 'px';
+            indicator.style.width = indicatorWidth + 'px';
+            indicator.style.height = indicatorHeight + 'px';
+        }
+
+        function hideSnapIndicator() {
+            const indicator = document.getElementById('snapIndicator');
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            hideSnapIndicator();
+            
+            if (!draggedItem) return;
+            
+            let targetCell = e.target;
+            
+            // If autosnap is enabled, find the nearest grid point
+            if (autosnapEnabled && e.clientX && e.clientY) {
+                const grid = document.getElementById('restaurantGrid');
+                const gridRect = grid.getBoundingClientRect();
+                
+                const cellWidth = gridRect.width / (window.innerWidth <= 480 ? 6 : window.innerWidth <= 768 ? 8 : 10);
+                const cellHeight = gridRect.height / (window.innerWidth <= 480 ? 5 : window.innerWidth <= 768 ? 6 : 8);
+                
+                const relativeX = e.clientX - gridRect.left;
+                const relativeY = e.clientY - gridRect.top;
+                
+                const col = Math.floor(relativeX / cellWidth);
+                const row = Math.floor(relativeY / cellHeight);
+                
+                const nearestCell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                if (nearestCell) {
+                    targetCell = nearestCell;
+                }
+            }
+            
+            const startRow = parseInt(targetCell.dataset.row);
+            const startCol = parseInt(targetCell.dataset.col);
+            const [width, height] = draggedItem.size.split('x').map(Number);
+            
+            // Check if placement is valid
+            if (canPlaceSeat(startRow, startCol, width, height)) {
+                placeSeat(startRow, startCol, width, height, draggedItem.type);
+            }
+        }
+
+        function canPlaceSeat(startRow, startCol, width, height) {
+            for (let r = startRow; r < startRow + height; r++) {
+                for (let c = startCol; c < startCol + width; c++) {
+                    if (r >= 8 || c >= 10) return false; // Out of bounds
+                    
+                    const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                    if (cell && cell.classList.contains('occupied')) return false;
+                }
+            }
+            return true;
+        }
+
+        function placeSeat(startRow, startCol, width, height, type) {
+            const seatId = `${type.toUpperCase()}-${seatCounter++}`;
+            
+            for (let r = startRow; r < startRow + height; r++) {
+                for (let c = startCol; c < startCol + width; c++) {
+                    const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                    if (cell) {
+                        cell.classList.add('occupied');
+                        cell.dataset.seatId = seatId;
+                        cell.dataset.seatType = type;
+                        
+                        // Only show ID in the top-left cell
+                        if (r === startRow && c === startCol) {
+                            cell.textContent = getShortId(type);
+                        }
+                    }
+                }
+            }
+            
+            // Store seat data
+            restaurantLayout[seatId] = {
+                type: type,
+                position: { row: startRow, col: startCol },
+                size: { width, height },
+                fabric: '',
+                color: '',
+                condition: 'Good',
+                notes: ''
+            };
+        }
+
+        function getShortId(type) {
+            switch(type) {
+                case 'small-booth': return 'SB';
+                case 'big-booth': return 'BB';
+                case 'chair': return 'C';
+                case 'barstool': return 'BS';
+                default: return 'S';
+            }
+        }
+
+        function selectCell(cell) {
+            if (!cell.classList.contains('occupied')) return;
+            
+            selectedSeat = cell.dataset.seatId;
+            const seatData = restaurantLayout[selectedSeat];
+            
+            // Show seat details panel
+            const detailsPanel = document.getElementById('seatDetails');
+            detailsPanel.style.display = 'block';
+            
+            // Populate form
+            document.getElementById('seatId').textContent = selectedSeat;
+            document.getElementById('seatType').textContent = seatData.type.replace('-', ' ');
+            
+            const form = document.getElementById('seatForm');
+            form.fabric.value = seatData.fabric;
+            form.color.value = seatData.color;
+            form.condition.value = seatData.condition;
+            form.notes.value = seatData.notes;
+        }
+
+        function saveSeatDetails() {
+            if (!selectedSeat) return;
+            
+            const form = document.getElementById('seatForm');
+            restaurantLayout[selectedSeat] = {
+                ...restaurantLayout[selectedSeat],
+                fabric: form.fabric.value,
+                color: form.color.value,
+                condition: form.condition.value,
+                notes: form.notes.value
+            };
+            
+            alert('Seat details saved!');
+        }
+
+        function removeSeat() {
+            if (!selectedSeat) return;
+            
+            const seatData = restaurantLayout[selectedSeat];
+            const { row, col } = seatData.position;
+            const { width, height } = seatData.size;
+            
+            // Clear grid cells
+            for (let r = row; r < row + height; r++) {
+                for (let c = col; c < col + width; c++) {
+                    const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                    if (cell) {
+                        cell.classList.remove('occupied');
+                        cell.textContent = '';
+                        delete cell.dataset.seatId;
+                        delete cell.dataset.seatType;
+                    }
+                }
+            }
+            
+            delete restaurantLayout[selectedSeat];
+            document.getElementById('seatDetails').style.display = 'none';
+            selectedSeat = null;
+        }
+
+        function clearGrid() {
+            if (confirm('Clear all seats from the layout?')) {
+                restaurantLayout = {};
+                seatCounter = 1;
+                selectedSeat = null;
+                document.getElementById('seatDetails').style.display = 'none';
+                initializeGrid();
+            }
+        }
+
+        function exportLayout() {
+            const layoutData = {
+                restaurant: prompt('Restaurant name:') || 'Unnamed Restaurant',
+                layout: restaurantLayout,
+                created: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(layoutData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `${layoutData.restaurant.replace(/\s+/g, '_')}_layout.json`;
+            link.click();
+        }
+
+        function loadSampleLayout() {
+            // Sample restaurant layout
+            restaurantLayout = {
+                'SMALL-BOOTH-1': { type: 'small-booth', position: {row: 1, col: 1}, size: {width: 2, height: 1}, fabric: 'Vinyl', color: 'Brown', condition: 'Good', notes: '' },
+                'BIG-BOOTH-1': { type: 'big-booth', position: {row: 3, col: 3}, size: {width: 3, height: 2}, fabric: 'Leather', color: 'Black', condition: 'Fair', notes: 'Corner booth' },
+                'CHAIR-1': { type: 'chair', position: {row: 0, col: 7}, size: {width: 1, height: 1}, fabric: 'Fabric', color: 'Red', condition: 'Good', notes: '' }
+            };
+            
+            initializeGrid();
+            
+            // Place sample seats
+            Object.entries(restaurantLayout).forEach(([seatId, data]) => {
+                const { row, col } = data.position;
+                const { width, height } = data.size;
+                
+                for (let r = row; r < row + height; r++) {
+                    for (let c = col; c < col + width; c++) {
+                        const cell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                        if (cell) {
+                            cell.classList.add('occupied');
+                            cell.dataset.seatId = seatId;
+                            cell.dataset.seatType = data.type;
+                            
+                            if (r === row && c === col) {
+                                cell.textContent = getShortId(data.type);
+                            }
+                        }
+                    }
                 }
             });
-        });
+            
+            seatCounter = 4; // Update counter for next seats
+        }
     </script>
 </body>
 </html>
