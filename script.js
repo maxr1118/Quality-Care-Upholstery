@@ -1055,4 +1055,7 @@ const clientDatabase = {
         lastVisit: '2 days ago',
         status: 'Active',
         seats: {
-            'A1': { type: 'Pew', fabric: '
+            'A1': { type: 'Pew', fabric: '' },
+        }
+    }
+};
