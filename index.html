@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+        <!-- Gallery Section -->
+        <div id="gallerySection" class="page-section">
+            <div class="section">
+                <h2>Our Featured Work</h2>
+                <p>Explore our portfolio of restaurant transformations</p>
+                
+                <!-- Gallery Grid -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +22,7 @@
     <!-- Navigation -->
     <div class="nav-header">
         <div class="nav-container">
-            <a href="#" class="logo" onclick="showLanding()">
+            <a href="#" class="logo" onclick="scrollToTop()">
                 <svg width="40" height="40" viewBox="0 0 40 40" style="margin-right: 12px;">
                     <rect x="18" y="5" width="4" height="30" fill="white"/>
                     <rect x="10" y="17" width="20" height="4" fill="white"/>
@@ -21,142 +32,54 @@
                 Quality Care <span class="secret-trigger" onclick="toggleAdmin()">Upholstery</span>
             </a>
             <nav class="nav-menu">
-                <a href="#home" class="nav-item" onclick="showLanding()">Home</a>
                 <a href="#services" class="nav-item" onclick="showSection('services')">Services</a>
-                <a href="#gallery" class="nav-item" onclick="showSection('gallery')">Our Work</a>
                 <a href="#design" class="nav-item" onclick="showSection('design')">Design</a>
+                <a href="#quote" class="nav-item" onclick="showSection('quote')">Get Quote</a>
                 <a href="#contact" class="nav-item" onclick="showSection('contact')">Contact</a>
                 <a href="#access" class="nav-item cta" onclick="showSection('access')">Access Portal</a>
             </nav>
             <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
             <div class="mobile-nav" id="mobileNav">
-                <a href="#home" class="nav-item" onclick="showLanding(); closeMobileMenu()">Home</a>
                 <a href="#services" class="nav-item" onclick="showSection('services'); closeMobileMenu()">Services</a>
-                <a href="#gallery" class="nav-item" onclick="showSection('gallery'); closeMobileMenu()">Our Work</a>
                 <a href="#design" class="nav-item" onclick="showSection('design'); closeMobileMenu()">Design</a>
+                <a href="#quote" class="nav-item" onclick="showSection('quote'); closeMobileMenu()">Get Quote</a>
                 <a href="#contact" class="nav-item" onclick="showSection('contact'); closeMobileMenu()">Contact</a>
                 <a href="#access" class="nav-item cta" onclick="showSection('access'); closeMobileMenu()">Access Portal</a>
             </div>
         </div>
     </div>
 
-    <!-- Landing Page Content -->
+    <!-- Main Portfolio Showcase -->
     <div class="container">
         <!-- Hero Section -->
-        <div class="header">
-            <div class="hero-logo">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <rect x="45" y="10" width="30" height="100" fill="#dc2626" rx="4"/>
-                    <rect x="10" y="45" width="100" height="30" fill="#dc2626" rx="4"/>
-                    <g transform="translate(20, 25)">
-                        <path d="M0 10 C-4 6, -8 10, -4 14 L4 18 C8 14, 4 4, 0 10 Z" fill="white"/>
-                        <circle cx="-2" cy="11" r="1.5" fill="#1a1a2e"/>
-                    </g>
-                </svg>
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <rect x="45" y="10" width="30" height="100" fill="#dc2626" rx="4"/>
+                        <rect x="10" y="45" width="100" height="30" fill="#dc2626" rx="4"/>
+                        <g transform="translate(20, 25)">
+                            <path d="M0 10 C-4 6, -8 10, -4 14 L4 18 C8 14, 4 4, 0 10 Z" fill="white"/>
+                            <circle cx="-2" cy="11" r="1.5" fill="#1a1a2e"/>
+                        </g>
+                    </svg>
+                </div>
+                <h1>Quality Care Upholstery</h1>
+                <p>Transforming Restaurant Seating Since 2010</p>
+                <div class="tagline">Professional Upholstery • Custom Design • Expert Restoration</div>
             </div>
-            <h1>Quality Care Upholstery</h1>
-            <p>Complete restaurant seating solutions</p>
-            <div class="tagline">Click. Pay. Fixed. Simple as choosing your movie seat.</div>
         </div>
 
-        <!-- Visual Process Steps -->
-        <div class="section">
-            <h2>See How Simple It Really Is</h2>
-            <p>Watch the complete process from scan to repair</p>
+        <!-- Portfolio Masonry Section -->
+        <div class="portfolio-section">
+            <div class="portfolio-header">
+                <h2>Our Featured Projects</h2>
+                <p>Discover the transformations we've created for restaurants across the region</p>
+            </div>
             
-            <div class="steps-flow">
-                <div class="step-demo">
-                    <div class="step-number">1</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="mini-qr"></div>
-                            <p style="font-size: 0.7rem;">Scan QR Code</p>
-                            <div class="scan-line"></div>
-                        </div>
-                    </div>
-                    <h3>Scan Your Code</h3>
-                    <p>Point your phone at the QR code we gave you</p>
-                </div>
-                
-                <div class="step-arrow">▶</div>
-                
-                <div class="step-demo">
-                    <div class="step-number">2</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="seat-grid">
-                                <div class="mini-seat good"></div>
-                                <div class="mini-seat good"></div>
-                                <div class="mini-seat damaged pulse"></div>
-                                <div class="mini-seat good"></div>
-                                <div class="mini-seat good"></div>
-                                <div class="mini-seat selected"></div>
-                                <div class="mini-seat good"></div>
-                                <div class="mini-seat good"></div>
-                            </div>
-                            <p style="font-size: 0.7rem;">Tap damaged seat</p>
-                        </div>
-                    </div>
-                    <h3>Click Damaged Seat</h3>
-                    <p>Tap the seat that needs repair</p>
-                </div>
-                
-                <div class="step-arrow">▶</div>
-                
-                <div class="step-demo">
-                    <div class="step-number">3</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <h4 style="font-size: 0.8rem; margin-bottom: 8px;">Booth Seat B2</h4>
-                            <div class="price-big">$85</div>
-                            <p style="font-size: 0.7rem;">Ready: 24-48 hours</p>
-                        </div>
-                    </div>
-                    <h3>Instant Quote</h3>
-                    <p>Price appears immediately</p>
-                </div>
-                
-                <div class="step-arrow">▶</div>
-                
-                <div class="step-demo">
-                    <div class="step-number">4</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="checkmark">✓</div>
-                            <h4 style="font-size: 0.8rem; margin-bottom: 8px;">Payment Complete!</h4>
-                            <p style="font-size: 0.7rem;">We'll be there Friday</p>
-                        </div>
-                    </div>
-                    <h3>Pay & Schedule</h3>
-                    <p>One tap and we handle the rest</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Customer Showcase -->
-        <div class="section">
-            <h2>Our Restaurant Partners</h2>
-            <div class="customer-carousel">
-                <div class="customer-card active">
-                    <h3>Oaks Church</h3>
-                    <p>Sanctuary & Fellowship Hall</p>
-                    <span class="stat">25 seats mapped</span>
-                </div>
-                <div class="customer-card">
-                    <h3>Tony's Pizza Palace</h3>
-                    <p>Dining Room & Bar Area</p>
-                    <span class="stat">42 seats mapped</span>
-                </div>
-                <div class="customer-card">
-                    <h3>Corner Café</h3>
-                    <p>Main Dining & Patio</p>
-                    <span class="stat">18 seats mapped</span>
-                </div>
-            </div>
-            <div class="carousel-dots">
-                <span class="dot active" onclick="showCustomer(0)"></span>
-                <span class="dot" onclick="showCustomer(1)"></span>
-                <span class="dot" onclick="showCustomer(2)"></span>
+            <!-- Masonry Portfolio Grid -->
+            <div class="masonry-grid" id="masonryGrid">
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
     </div>
@@ -172,6 +95,137 @@
                 <!-- Gallery Grid -->
                 <div class="gallery-grid" id="galleryGrid">
                     <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote Section -->
+        <div id="quoteSection" class="page-section">
+            <div class="section">
+                <h2>Get Your Quote</h2>
+                <p>Provide your project details and we'll give you an instant estimate</p>
+                
+                <div class="quote-container">
+                    <form id="quoteForm" class="quote-form">
+                        <!-- Client Information -->
+                        <div class="form-group">
+                            <label for="clientName">Restaurant/Business Name</label>
+                            <input type="text" id="clientName" name="clientName" placeholder="Enter your business name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Contact Name</label>
+                                <input type="text" id="contactName" name="contactName" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <!-- Project Details -->
+                        <div class="form-section-header">
+                            <h3>Project Details</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceType">Service Type</label>
+                            <select id="serviceType" name="serviceType" onchange="updatePricing()" required>
+                                <option value="">Select service type</option>
+                                <option value="repair">Repair/Patch Work</option>
+                                <option value="reupholster">Complete Reupholstery</option>
+                                <option value="new">New Upholstery Installation</option>
+                                <option value="consultation">Design Consultation</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="seatType">Seat Type</label>
+                                <select id="seatType" name="seatType" onchange="updatePricing()">
+                                    <option value="">Select seat type</option>
+                                    <option value="chair">Dining Chair</option>
+                                    <option value="booth-small">Small Booth (2-person)</option>
+                                    <option value="booth-large">Large Booth (4-person)</option>
+                                    <option value="barstool">Bar Stool</option>
+                                    <option value="banquette">Banquette Seating</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Number of Seats</label>
+                                <input type="number" id="quantity" name="quantity" placeholder="How many?" min="1" onchange="updatePricing()">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fabric">Fabric Preference</label>
+                            <select id="fabric" name="fabric" onchange="updatePricing()">
+                                <option value="">Select fabric type</option>
+                                <option value="vinyl">Vinyl (Durable, Easy Clean)</option>
+                                <option value="leather">Leather (Premium)</option>
+                                <option value="fabric">Fabric (Comfortable)</option>
+                                <option value="custom">Custom Material</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">Timeline</label>
+                            <select id="urgency" name="urgency" onchange="updatePricing()">
+                                <option value="">Select timeline</option>
+                                <option value="standard">Standard (2-3 weeks)</option>
+                                <option value="priority">Priority (1-2 weeks)</option>
+                                <option value="rush">Rush (Under 1 week)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Project Description</label>
+                            <textarea id="description" name="description" placeholder="Describe your project, any specific requirements, damage details, etc." rows="4"></textarea>
+                        </div>
+                        
+                        <!-- Price Estimate -->
+                        <div class="price-estimate" id="priceEstimate" style="display: none;">
+                            <div class="estimate-header">
+                                <h3>Estimated Quote</h3>
+                                <p>Based on the information provided</p>
+                            </div>
+                            <div class="price-breakdown">
+                                <div class="price-line">
+                                    <span>Base Service Cost:</span>
+                                    <span id="baseCost">$0</span>
+                                </div>
+                                <div class="price-line">
+                                    <span>Material Cost:</span>
+                                    <span id="materialCost">$0</span>
+                                </div>
+                                <div class="price-line">
+                                    <span>Quantity (<span id="qtyDisplay">0</span> seats):</span>
+                                    <span id="quantityCost">$0</span>
+                                </div>
+                                <div class="price-line modifier" id="urgencyLine" style="display: none;">
+                                    <span>Rush Fee:</span>
+                                    <span id="urgencyFee">$0</span>
+                                </div>
+                                <div class="price-total">
+                                    <span>Total Estimate:</span>
+                                    <span id="totalCost">$0</span>
+                                </div>
+                            </div>
+                            <p class="price-note">*Final pricing may vary based on site inspection and specific requirements</p>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn secondary" onclick="clearQuote()">Clear Form</button>
+                            <button type="submit" class="btn">Request Official Quote</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

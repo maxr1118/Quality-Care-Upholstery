@@ -20,39 +20,61 @@ function showTab(tabName) {
 }
 
 // Gallery Functions
-function initializeGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    if (!galleryGrid) return;
+function initializeMasonryGallery() {
+    const masonryGrid = document.getElementById('masonryGrid');
+    if (!masonryGrid) return;
     
-    galleryGrid.innerHTML = '';
+    masonryGrid.innerHTML = '';
+    
+    const masonryLayouts = [
+        { class: 'tall', span: 'tall' },
+        { class: '', span: 'normal' },
+        { class: 'wide', span: 'wide' },
+        { class: '', span: 'normal' },
+        { class: 'tall', span: 'tall' },
+        { class: '', span: 'normal' }
+    ];
+    
+    let layoutIndex = 0;
     
     Object.entries(clientDatabase).forEach(([clientId, client]) => {
         const coverPhoto = client.photos?.find(photo => photo.isCover) || client.photos?.[0];
         const photoCount = client.photos?.length || 0;
+        const layout = masonryLayouts[layoutIndex % masonryLayouts.length];
         
-        const galleryCard = document.createElement('div');
-        galleryCard.className = 'gallery-card';
-        galleryCard.onclick = () => openClientGallery(clientId);
+        const masonryItem = document.createElement('div');
+        masonryItem.className = `masonry-item ${layout.class}`;
+        masonryItem.onclick = () => openClientGallery(clientId);
         
-        galleryCard.innerHTML = `
-            <div class="gallery-card-image" style="background-image: url('${coverPhoto?.url || ''}')">
-                ${!coverPhoto ? '<div class="gallery-placeholder">📷 No Photos Yet</div>' : ''}
-                <div class="gallery-card-overlay">
+        masonryItem.innerHTML = `
+            <div class="masonry-image" style="background-image: url('${coverPhoto?.url || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600'}')">
+                <div class="masonry-overlay">
                     <div style="color: white;">
-                        <h4 style="margin: 0; font-size: 1.1rem;">${client.name}</h4>
-                        <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem;">${client.location}</p>
+                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">${client.name}</h4>
+                        <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">${client.location}</p>
                     </div>
                 </div>
+                <button class="masonry-view-more">📷</button>
             </div>
-            <div class="gallery-card-info">
+            <div class="masonry-content">
                 <h3>${client.name}</h3>
                 <p>${client.location}</p>
-                <span class="photo-count-badge">${photoCount} Photos</span>
+                <div class="masonry-stats">
+                    <span class="masonry-stat">${photoCount} Photos</span>
+                    <span class="masonry-stat">${client.totalSeats} Seats</span>
+                    <span class="masonry-stat">${client.status}</span>
+                </div>
             </div>
         `;
         
-        galleryGrid.appendChild(galleryCard);
+        masonryGrid.appendChild(masonryItem);
+        layoutIndex++;
     });
+}
+
+function initializeGallery() {
+    // This function is now replaced by initializeMasonryGallery
+    initializeMasonryGallery();
 }
 
 function openClientGallery(clientId) {
@@ -198,7 +220,7 @@ function toggleCoverPhoto(clientId, photoId) {
     if (photo) {
         photo.isCover = true;
         initializeAdminPhotoGrid();
-        initializeGallery();
+        initializeMasonryGallery();
         alert(`Cover photo updated for ${client.name}`);
     }
 }// Global Variables
@@ -288,10 +310,8 @@ const clientDatabase = {
 };
 
 // Navigation Functions
-function showLanding() {
-    document.querySelectorAll('.page-section').forEach(section => {
-        section.classList.remove('active');
-    });
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showSection(sectionName) {
@@ -301,8 +321,8 @@ function showSection(sectionName) {
     
     const sectionMap = {
         'services': 'servicesSection',
-        'gallery': 'gallerySection',
         'design': 'designSection',
+        'quote': 'quoteSection',
         'contact': 'contactSection',
         'access': 'accessSection'
     };
@@ -673,25 +693,34 @@ function scheduleMaintenance(seatId) {
     alert(`Scheduling maintenance for seat ${seatId}. This feature will integrate with your calendar system.`);
 }
 
-// Customer Carousel Functions
-function showCustomer(index) {
-    const customers = document.querySelectorAll('.customer-card');
-    const dots = document.querySelectorAll('.dot');
-    
-    customers.forEach(card => card.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    customers[index].classList.add('active');
-    dots[index].classList.add('active');
-    
-    currentCustomer = index;
-}
+// Remove the customer carousel functions since we're not using them anymore
 
-function accessPortal() {
-    alert('Portal access would redirect to client seat map');
-}
-
-// Layout Designer Class
+// Initialize Everything
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize layout designer
+    layoutDesigner = new LayoutDesigner();
+    
+    // Initialize masonry gallery
+    initializeMasonryGallery();
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (isMobileMenuOpen && !mobileNav.contains(e.target) && !mobileMenu.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close gallery modal when clicking outside
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('galleryModal');
+        if (e.target === modal) {
+            closeGalleryModal();
+        }
+    });
+});
 class LayoutDesigner {
     constructor() {
         this.draggedItem = null;
@@ -991,14 +1020,7 @@ function loadSampleLayout() {
     if (layoutDesigner) layoutDesigner.loadSampleLayout();
 }
 
-// Auto-cycle customers
-setInterval(() => {
-    const customers = document.querySelectorAll('.customer-card');
-    if (customers.length > 0) {
-        currentCustomer = (currentCustomer + 1) % customers.length;
-        showCustomer(currentCustomer);
-    }
-}, 3000);
+// Remove the auto-cycling customer code since we're not using it anymore
 
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', function() {
@@ -1055,7 +1077,4 @@ const clientDatabase = {
         lastVisit: '2 days ago',
         status: 'Active',
         seats: {
-            'A1': { type: 'Pew', fabric: '' },
-        }
-    }
-};
+            'A1': { type: 'Pew', fabric: '
